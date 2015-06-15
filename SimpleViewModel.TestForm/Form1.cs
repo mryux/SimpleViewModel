@@ -25,36 +25,16 @@ namespace SimpleViewModel.TestForm
             ViewModel.BindTo(vm => vm.LastName, _textBoxLastName, c => c.Text, null);
             ViewModel.BindTo(vm => vm.Male, _checkBoxMale, c => c.Checked, null);
 
-            //BankModel.BindList("AccountName", _listBoxAccounts);
-            //BankModel.BindList("AccountNameIndex", _comboBoxAccounts, "SelectedIndex");
+            ViewModel.BindTo(vm => vm.State, _comboBoxState, c => c.SelectedItem, comboBox =>
+            {
+                BindingList<State> lStates = new BindingList<State>();
+
+                lStates.Add(new State() { Name = "NSW", Code = 2 });
+                lStates.Add(new State() { Name = "VIC", Code = 3 });
+
+                comboBox.DataSource = lStates;
+                comboBox.DisplayMember = "Name";
+            });
         }
-
-        //public void BindList(string pPropertyName, ListBox pListBox, string pControlPropertyName = "SelectedItem")
-        //{
-        //    BindingList<ListBoxItem> nl = new BindingList<ListBoxItem>();
-
-        //    nl.Add(new ListBoxItem() { Id = 1, FirstName = "Jane", LastName = "Doe" });
-        //    nl.Add(new ListBoxItem() { Id = 2, FirstName = "Mary", LastName = "Smith" });
-
-        //    pListBox.DataSource = nl;
-        //    pListBox.DisplayMember = "DisplayName";
-
-        //    pListBox.DataBindings.Add(pControlPropertyName, _BindingSource, pPropertyName);
-        //}
-
-        //public void BindList(string pPropertyName, ComboBox pCombo, string pControlPropertyName = "SelectedItem")
-        //{
-        //    BindingList<ListBoxItem> nl = new BindingList<ListBoxItem>();
-
-        //    nl.Add(new ListBoxItem() { Id = 1, FirstName = "Jane", LastName = "Doe" });
-        //    nl.Add(new ListBoxItem() { Id = 2, FirstName = "Mary", LastName = "Smith" });
-        //    nl.Add(new ListBoxItem() { Id = 3, FirstName = "dick", LastName = "Smith" });
-
-        //    pCombo.DataSource = nl;
-        //    pCombo.DisplayMember = "DisplayName";
-
-        //    pCombo.DataBindings.Add(pControlPropertyName, _BindingSource, pPropertyName);
-        //}
-
     }
 }

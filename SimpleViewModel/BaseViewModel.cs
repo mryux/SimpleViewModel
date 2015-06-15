@@ -29,7 +29,7 @@ namespace SimpleViewModel.Core
     public static class ViewModelExtension
     {
         public static void BindTo<TModel, TControl, TPropertyType>(this TModel pModel, Expression<Func<TModel, TPropertyType>> pExprVmProperty, TControl pControl, 
-            Expression<Func<TControl, TPropertyType>> pExprControlProperty, Action<TControl> pActionInit)
+            Expression<Func<TControl, TPropertyType>> pExprControlProperty, Action<TControl> pActionInit=null)
             where TModel : BaseViewModel
             where TControl : Control
         {

@@ -12,5 +12,12 @@ namespace SimpleViewModel.TestForm
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool Male { get; set; }
+        public State State { get; set; }
+    }
+
+    class State
+    {
+        public string Name { get; set; }
+        public int Code { get; set; }
     }
 }
