@@ -12,6 +12,8 @@ namespace SimpleViewModel.Core
 {
     public abstract class BaseViewModel
     {
+        public event EventHandler ValueChanged = delegate { };
+
         private BindingSource _BindingSource = new BindingSource();
 
         public BaseViewModel()
@@ -22,7 +24,12 @@ namespace SimpleViewModel.Core
 
         public void Bind(string pPropertyName, Control pControl, string pControlPropertyName = "Text")
         {
-            pControl.DataBindings.Add(pControlPropertyName, _BindingSource, pPropertyName);
+            Binding lBinding = pControl.DataBindings.Add(pControlPropertyName, _BindingSource, pPropertyName);
+
+            lBinding.Parse += delegate
+            {
+                ValueChanged(this, EventArgs.Empty);
+            };
         }
     }
 

@@ -21,6 +21,7 @@ namespace SimpleViewModel.TestForm
 
             ViewModel = new PersonViewModel() { FirstName = "firstName", LastName = "lastName", Male = true };
 
+            ViewModel.ValueChanged += OnViewModelValueChanged;
             ViewModel.BindTo(vm => vm.FirstName, _textBoxFirstName, c => c.Text, null);
             ViewModel.BindTo(vm => vm.LastName, _textBoxLastName, c => c.Text, null);
             ViewModel.BindTo(vm => vm.Male, _checkBoxMale, c => c.Checked, null);
@@ -35,6 +36,21 @@ namespace SimpleViewModel.TestForm
                 comboBox.DataSource = lStates;
                 comboBox.DisplayMember = "Name";
             });
+        }
+
+        private bool IsDirty
+        {
+            get { return Text.EndsWith("*"); }
+            set
+            {
+                if (!Text.EndsWith("*"))
+                    Text += "*";
+            }
+        }
+
+        void OnViewModelValueChanged(object sender, EventArgs e)
+        {
+            IsDirty = true;
         }
     }
 }
